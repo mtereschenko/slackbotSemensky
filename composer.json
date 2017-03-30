@@ -1,0 +1,23 @@
+{
+    "name": "vendor/slackbot-semensky",
+    "description": "Description of project slackbotSemensky.",
+    "authors": [
+        {
+            "name": "edell",
+            "email": "your@email.here"
+        }
+    ],
+    "require": {
+        "larapack/dd": "dev-master",
+        "guzzlehttp/guzzle": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "app\\": "src/app"
+        },
+        "files": [
+            "src/app/utils/helper.php",
+            "src/app/exceptions/CustomExceptions.php"
+        ]
+    }
+}

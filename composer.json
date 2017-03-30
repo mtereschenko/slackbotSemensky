@@ -9,7 +9,8 @@
     ],
     "require": {
         "larapack/dd": "dev-master",
-        "guzzlehttp/guzzle": "dev-master"
+        "guzzlehttp/guzzle": "dev-master",
+        "maknz/slack": "^1.7"
     },
     "autoload": {
         "psr-4": {

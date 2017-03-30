@@ -5,10 +5,26 @@ namespace app\utils;
 class ConfigFactory
 {
 
-    public function __construct()
+    private static $instance = null;
+
+    private function __construct()
     {
         $onfigFile = './config/app.php';
+
         $this->loadConfig($onfigFile);
+    }
+
+    private function __clone()
+    {
+        
+    }
+
+    public static function getFactory()
+    {
+        if (null === self::$instance) {
+            self::$instance = new self();
+        }
+        return self::$instance;
     }
 
     private function loadConfig($fullFileName)
@@ -28,6 +44,7 @@ class ConfigFactory
             if (is_array($value)) {
                 $propertyPart[] = $property;
                 $this->setConfig($value, $propertyPart);
+                $propertyPart = [];
             } else {
                 $propertyPart[] = $property;
                 $finalPropertyname = implode('_', $propertyPart);

@@ -4,7 +4,6 @@ namespace app\utils;
 
 class ConfigFactory
 {
-
     private static $instance = null;
 
     private function __construct()
@@ -56,12 +55,9 @@ class ConfigFactory
     public function get($property)
     {
         if (property_exists($this, $property)) {
-            $property = $this->$property;
-        } else {
-            $property = NULL;
+            return $this->$property;
         }
 
-        return $property;
+        return null;
     }
-
 }

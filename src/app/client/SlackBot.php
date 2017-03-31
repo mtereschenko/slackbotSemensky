@@ -6,7 +6,6 @@ use Maknz\Slack\Client;
 
 class SlackBot
 {
-
     private $messages = [
         [
             'text' => 'Уволен Прогер Семецкий. Коммиты в мастер.',
@@ -74,5 +73,4 @@ class SlackBot
 
         return $shuffledMessages;
     }
-
 }

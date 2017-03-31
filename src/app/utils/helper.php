@@ -1,5 +1,4 @@
 <?php
-
 if (!function_exists('config')) {
 
     function config($propertyNeme)
@@ -8,5 +7,4 @@ if (!function_exists('config')) {
 
         return $config->get($propertyNeme);
     }
-
 }

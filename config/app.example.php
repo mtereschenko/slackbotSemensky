@@ -1,10 +1,9 @@
 <?php
-
 return [
     'google' => [
-        'document_url' => 'url',
+        'documentUrl' => 'url',
     ],
     'slack' => [
-        'web_hook' => 'slackWebHook'
+        'webHook' => 'slackWebHook'
     ]
 ];

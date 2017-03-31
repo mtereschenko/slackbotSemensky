@@ -16,5 +16,4 @@ class GoogleClient
         $response = $client->request('GET');
         dd($response->getBody());
     }
-
 }

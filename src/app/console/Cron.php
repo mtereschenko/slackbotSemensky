@@ -27,5 +27,4 @@ class Cron
             sleep(rand(4, 10));
         }
     }
-
 }

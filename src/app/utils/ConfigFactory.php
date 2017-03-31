@@ -15,7 +15,6 @@ class ConfigFactory
 
     private function __clone()
     {
-        
     }
 
     public static function getFactory()

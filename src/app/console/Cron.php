@@ -2,16 +2,13 @@
 
 namespace app\console;
 
-use app\client\GoogleClient;
 use app\client\SlackBot;
-use app\model\GoogleDocument;
 
 class Cron
 {
 
     public function __construct()
     {
-        
     }
 
     public function run()
@@ -19,7 +16,7 @@ class Cron
         $slack = new SlackBot();
 //        $document = new GoogleDocument((new GoogleClient));
 //        $document->getContent();
-        while (TRUE) {
+        while (true) {
             $message = $slack->getMessage();
 //            d($message);
             $slack->sendMessage($message);

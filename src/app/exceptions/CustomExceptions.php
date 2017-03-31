@@ -2,5 +2,4 @@
 
 class FileNotFoundException extends Exception
 {
-    
 }

@@ -22,6 +22,7 @@ class ConfigFactory
         if (null === self::$instance) {
             self::$instance = new self();
         }
+
         return self::$instance;
     }
 
@@ -56,7 +57,5 @@ class ConfigFactory
         if (property_exists($this, $property)) {
             return $this->$property;
         }
-
-        return null;
     }
 }

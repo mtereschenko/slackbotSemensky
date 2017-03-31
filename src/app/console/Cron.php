@@ -6,7 +6,6 @@ use app\client\SlackBot;
 
 class Cron
 {
-
     public function __construct()
     {
     }

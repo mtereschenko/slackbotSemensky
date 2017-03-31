@@ -1,6 +1,6 @@
 <?php
-if (!function_exists('config')) {
 
+if (!function_exists('config')) {
     function config($propertyNeme)
     {
         $config = app\utils\ConfigFactory::getFactory();

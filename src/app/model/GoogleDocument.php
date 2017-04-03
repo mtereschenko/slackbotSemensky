@@ -2,21 +2,28 @@
 
 namespace app\model;
 
-use app\client\GoogleClient;
-
 class GoogleDocument
 {
     private $documentUrl;
     private $client;
+    private $spreadsheetId;
+    const RANGE = 'A:B';
 
-    public function __construct(GoogleClient $client)
+    public function __construct(\Google_Service_Sheets $client)
     {
         $this->client = $client;
-        $this->documentUrl = config('google_document_url');
+        $this->documentUrl = config('googleDocumentUrl');
+        $this->spreadsheetId = config('googleSpreadsheetId');
+        $this->range = 'Class Data!A2:E';
     }
 
+    /** 
+     * Getting content of google spread sheets
+     * @return array
+     */
     public function getContent()
     {
-        $this->client->getDocument($this->documentUrl);
+        $response = $this->client->spreadsheets_values->get($this->spreadsheetId, self::RANGE);
+        return $response->getValues();
     }
 }

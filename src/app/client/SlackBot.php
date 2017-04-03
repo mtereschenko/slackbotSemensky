@@ -6,37 +6,24 @@ use Maknz\Slack\Client;
 
 class SlackBot
 {
-    private $messages = [
-        [
-            'text'  => 'Уволен Прогер Семецкий. Коммиты в мастер.',
-            'count' => 0,
-        ],
-        [
-            'text'  => 'Уволен Прогер Семецкий. Не соблюдал СОЛИД.',
-            'count' => 0,
-        ],
-        [
-            'text'  => 'Уволен Прогер Семецкий. Регулярно нарушал НДА.',
-            'count' => 0,
-        ],
-        [
-            'text'  => 'Уволен Прогер Семецкий. Попал начальнику под горячую руку. Хороший был прогер.',
-            'count' => 0,
-        ],
-        [
-            'text'  => 'Уволен Прогер Семецкий. Мешал JS, HTML, CSS, PHP в одном файле.',
-            'count' => 0,
-        ],
-    ];
     private $client;
+    const BOT_CONFIG = [
+        'username' => 'ZONA.TECH',
+        //just lazy to store it in repo
+        'icon' => 'http://vignette2.wikia.nocookie.net/stalker/images/b/b4/Y_68641107.jpg/revision/latest?cb=20151015023343&path-prefix=ru',
+    ];
 
     public function __construct()
     {
-        $this->client = new Client(config('slack_web_hook'));
-        $this->client->send('Hello world!');
+        $this->client = new Client(config('slackWebHook'), self::BOT_CONFIG);
     }
 
-    public function getMessage()
+    /** 
+     * Select one message of all
+     * @param array $messages
+     * @return string message text
+     */
+    public function selectOneMessage($messages)
     {
         /*
          * уже хочу спать. Думать лень, а результат хочу(((
@@ -45,28 +32,34 @@ class SlackBot
          * бот должен решать что взять
          */
 
-        $commonMessageKey = '';
-        $lessCounter = 1000000000000000;
-        $messages = $this->shuffleMessages($this->messages);
+        $suffledMessages = $this->shuffleMessages($messages);
+        $messageKey = rand(0, count($suffledMessages));
+        list($text, $count) = $suffledMessages[$messageKey];
 
-        foreach ($messages as $key => $message) {
-            if ($message['count'] <= $lessCounter) {
-                $lessCounter = $message['count'];
-                $commonMessageKey = $key;
-            }
-        }
-        $this->messages[$commonMessageKey]['count']++;
-
-        return $this->messages[$commonMessageKey]['text'];
+        return $text;
     }
 
+    /** 
+     * Send message to slack
+     * @param string $message
+     */
     public function sendMessage($message)
     {
         $this->client->send($message);
     }
 
+    /** 
+     * Here we have to shuffle all incoming messages
+     * account the frequency
+     * @param array $messages
+     * @return array
+     */
     private function shuffleMessages($messages)
     {
+        /* 
+         * todo Начу учитывать частоту выпадания сообщений
+         * с учетом поступления новых сообщений
+         */
         $keys = array_keys($messages);
         shuffle($keys);
         $shuffledMessages = array_combine($keys, $messages);

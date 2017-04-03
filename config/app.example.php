@@ -2,9 +2,10 @@
 
 return [
     'google' => [
-        'documentUrl' => 'url',
+        'documentUrl'   => 'Google spread sheet URL',
+        'spreadsheetId' => '',
     ],
-    'slack' => [
-        'webHook' => 'slackWebHook',
+    'slack'  => [
+        'webHook' => '',
     ],
 ];

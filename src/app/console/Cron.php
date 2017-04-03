@@ -3,24 +3,28 @@
 namespace app\console;
 
 use app\client\SlackBot;
+use app\client\GoogleDocsClient;
+use app\model\GoogleDocument;
 
 class Cron
 {
-    public function __construct()
-    {
-    }
-
+    /** 
+     * Actually run the cron process
+     */
     public function run()
     {
+        /* 
+         * todo Вынести сбор клиентов и работу с ними в отельный механизм
+         * Добавить вк клиент
+         */
         $slack = new SlackBot();
-//        $document = new GoogleDocument((new GoogleClient));
-//        $document->getContent();
+        $googleServiceClient = new GoogleDocsClient((new \Google_Client()));
+        $document = new GoogleDocument($googleServiceClient->getGoogleServiceSheetsClient());
         while (true) {
-            $message = $slack->getMessage();
-//            d($message);
+            sleep(rand(60*120, 60*240));
+            $messages = $document->getContent();
+            $message = $slack->selectOneMessage($messages);
             $slack->sendMessage($message);
-//            sleep(1);
-            sleep(rand(4, 10));
         }
     }
 }

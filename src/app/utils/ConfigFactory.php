@@ -8,9 +8,9 @@ class ConfigFactory
 
     private function __construct()
     {
-        $onfigFile = './config/app.php';
+        $configFile = './config/app.php';
 
-        $this->loadConfig($onfigFile);
+        $this->loadConfig($configFile);
     }
 
     private function __clone()
@@ -29,7 +29,7 @@ class ConfigFactory
     private function loadConfig($fullFileName)
     {
         if (!file_exists($fullFileName)) {
-            throw new \FileNotFoundException("Whoops))) File {$fullFileName} not found ;)");
+            throw new \FileNotFoundException("Whoops))) File {$fullFileName} not found. Create config file first ;)");
         }
 
         $config = require_once $fullFileName;
@@ -41,13 +41,16 @@ class ConfigFactory
     {
         foreach ($config as $property => $value) {
             if (is_array($value)) {
-                $propertyPart[] = $property;
+                $propertyPart[$property] = ucfirst($property);
                 $this->setConfig($value, $propertyPart);
                 $propertyPart = [];
             } else {
-                $propertyPart[] = $property;
-                $finalPropertyname = implode('_', $propertyPart);
-                $this->$finalPropertyname = $value;
+                $propertyPart[$property] = ucfirst($property);
+                $finalPropertyname = implode('', $propertyPart);
+                $formatedPropertyName = lcfirst($finalPropertyname);
+                $this->$formatedPropertyName = $value;
+                // явный костыль чтобы не накапливать уровни переменных
+                unset($propertyPart[$property]);
             }
         }
     }

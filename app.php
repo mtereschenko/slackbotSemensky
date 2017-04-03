@@ -11,7 +11,7 @@ define('SCOPES', implode(' ', array(
 ));
 
 if (php_sapi_name() != 'cli') {
-  throw new Exception('This application must be run on the command line.');
+    throw new \Exception('This application must be run on the command line.');
 }
 
 use app\console\Cron;
@@ -19,7 +19,7 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
 $log = new Logger('Semensky log');
-$log->pushHandler(new StreamHandler(config('logPath'), Logger::WARNING));
+$log->pushHandler(new StreamHandler(config('logPath'), Logger::EMERGENCY));
 
 try {
     $cron = new Cron();

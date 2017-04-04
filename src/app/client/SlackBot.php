@@ -33,7 +33,7 @@ class SlackBot
          */
 
         $suffledMessages = $this->shuffleMessages($messages);
-        $messageKey = rand(0, count($suffledMessages));
+        $messageKey = rand(0, count($suffledMessages)-1);
         list($text, $count) = $suffledMessages[$messageKey];
 
         return $text;
